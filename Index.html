@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine ❤️</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      overflow: hidden;
+    }.card {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  border-radius: 26px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  max-width: 380px;
+  width: 92%;
+  color: #fff;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: 2.2rem;
+}
+
+p {
+  margin-bottom: 30px;
+  font-size: 1.15rem;
+}
+
+.buttons {
+  position: relative;
+  height: 90px;
+}
+
+button {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  position: absolute;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+#yesBtn {
+  background: #ff2f68;
+  color: white;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 10px 25px rgba(255,47,104,0.6);
+}
+
+#noBtn {
+  background: #fff;
+  color: #ff2f68;
+  right: 10px;
+  top: 0;
+  animation: shiver 0.25s infinite;
+}
+
+@keyframes shiver {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+.thank-you {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.thank-you h2 {
+  font-size: 2.1rem;
+}
+
+.thank-you img {
+  width: 230px;
+  border-radius: 18px;
+}
+
+.hearts span {
+  position: absolute;
+  bottom: -20px;
+  font-size: 22px;
+  animation: float 6s linear infinite;
+  opacity: 0.85;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+  </style>
+</head>
+<body>  <div class="card" id="card">
+    <h1>Hey Love ❤️</h1>
+    <p>Will you be my Valentine? 💘</p><div class="buttons">
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No 🙃</button>
+</div>
+
+  </div>  <div class="card thank-you" id="thankYou">
+    <h2>Thank You ❤️</h2>
+    <p>You just made me the happiest person 💕</p>
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Thank you gif">
+  </div>  <div class="hearts" id="hearts"></div>  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const card = document.getElementById('card');
+    const thankYou = document.getElementById('thankYou');
+
+    let scale = 1;
+
+    function shrinkNo() {
+      scale -= 0.12;
+      if (scale < 0.35) scale = 0.35;
+      noBtn.style.transform = `scale(${scale})`;
+    }
+
+    noBtn.addEventListener('mouseover', shrinkNo);
+    noBtn.addEventListener('click', shrinkNo);
+
+    yesBtn.addEventListener('click', () => {
+      card.style.display = 'none';
+      thankYou.style.display = 'flex';
+      startHearts();
+    });
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement('span');
+        heart.innerText = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.getElementById('hearts').appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 280);
+    }
+  </script></body>
+</html>
